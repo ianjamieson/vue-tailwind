@@ -49,6 +49,10 @@ const TRichSelect = MultipleInput.extend({
       type: Boolean,
       default: false,
     },
+    alwaysOpen: {
+      type: Boolean,
+      default: false,
+    },
     openOnFocus: {
       type: Boolean,
       default: true,
@@ -201,6 +205,10 @@ const TRichSelect = MultipleInput.extend({
         .filter((option) => !!option) as NormalizedOptions;
     } else if (!this.selectedOption || this.selectedOption.value !== this.value) {
       this.selectedOption = this.findOptionByValue(this.value);
+    }
+
+    if (this.alwaysOpen) {
+      this.showOptions();
     }
   },
 
@@ -439,7 +447,6 @@ const TRichSelect = MultipleInput.extend({
           this.filteredOptions = [];
         }
 
-
         this.searching = false;
         this.delayTimeout = undefined;
       }, this.delay);
@@ -488,6 +495,10 @@ const TRichSelect = MultipleInput.extend({
         });
     },
     hideOptions() {
+      if (this.alwaysOpen) {
+        return;
+      }
+
       this.show = false;
 
       if (this.selectOnClose && this.highlightedOption) {

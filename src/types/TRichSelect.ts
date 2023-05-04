@@ -46,6 +46,7 @@ type TRichSelect = CombinedVueInstance<Vue,
   autofocus?: boolean;
   disabled?: boolean;
   hideSearchBox?: boolean;
+  alwaysOpen: boolean,
   openOnFocus: boolean;
   closeOnSelect: boolean;
   selectOnClose: boolean;
